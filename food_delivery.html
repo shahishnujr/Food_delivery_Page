@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Food Delivery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+			margin: 0; 
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            padding: 1rem;
+            text-align: center;
+            color: white;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #ff4d4d;
+            color: white;
+            
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: green;
+        }
+        
+		
+        td {
+            padding: 5px;
+        }
+		footer {
+            background-color: #333;
+            color: white;
+            height: 45px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+		
+    </style>
+</head>
+<body>
+<header>
+    <h1 style = "color:white;">Welcome to Our Food Delivery Page!</h1>
+</header>
+<h4>Specify the quantity of items to buy and the address of delivery</h4>
+<center>
+<table>
+    <form id="ord-for">
+        <tr>
+            <td><label for="pizza">Pizza (Cost: Rs.100):</label></td>
+            <td><input type="text" id="pizza" name="pizza" pattern="[0-9]{10}" required placeholder="Enter the quantity"></td>
+        </tr>
+        <tr>
+            <td><label for="burger">Burger (Cost: Rs.90):</label></td>
+            <td><input type="text" id="burger" name="burger" pattern="[0-9]{10}" required placeholder="Enter the quantity"></td>
+        </tr>
+        
+        <tr>
+            <td><label for="drink">Drink (Cost: Rs.60) :</label></td>
+            <td><input type="text" id="drink" name="drink" pattern="[A-Za-z]{10}" required placeholder="Enter the quantity"></td>
+        </tr>
+		<tr>
+            <td><label for="address">Address:</label></td>
+            <td><input type="text" placeholder="Enter your address here" id="address"></td>
+        </tr>
+        
+          </table></center><br>
+                <input type="button" onclick="calculateOrder()" value ="Calculate Order">
+                <input type="button" onclick="resetForm()" value ="Reset">
+            
+        
+    </form>
+	<br>
+
+<div id="ord-sum"></div>
+<footer>
+    <p>Contact us: fd123@gmail.com | Phone:+91 83674198xx</p>
+</footer>
+<script>
+    function calculateOrder() {
+  
+    var pizzaQty = document.getElementById("pizza").value;
+    var burgerQty = document.getElementById("burger").value;
+    var drinkQty = document.getElementById("drink").value;
+    var address = document.getElementById("address").value;
+
+    if (address === ""|| pizzaQty === ""||burgerQty === ""||drinkQty === "" ) {
+        window.alert("Please Fill out all the fields");
+        return; 
+    }
+
+   
+    if (isNaN(pizzaQty) || isNaN(burgerQty) || isNaN(drinkQty)) {
+        window.alert("Please enter numeric values for quantity of food items.");
+        return; 
+    }
+	var piz= (pizzaQty * 100);
+	var bpr = (burgerQty * 90);
+	var drpr =(drinkQty * 60);
+    var total = (pizzaQty * 100) + (burgerQty * 90) + (drinkQty * 60);
+    
+    var summary = "Order Summary:<br>";
+    summary += "Cost of Pizza : Rs." + piz +"<br>" ;
+    summary += "Cost of Burger: Rs." + bpr+"<br>"  ;
+    summary += "Cost of Drink : Rs." + drpr +"<br>" ;
+    summary += "Total Cost    : Rs." + total+"<br>" ;
+    document.getElementById("ord-sum").innerHTML = "<div style='border: 5px solid black;padding:1px;width:auto;height:auto;text-align: center;'><b>Hi! Your order consists of " +summary+ "It will be delivered to: "+address+"<br> Thank You for choosing our service!</b></div>";
+}
+function resetForm() {
+        document.getElementById("ord-for").reset(); 
+        document.getElementById("ord-sum").innerHTML = ""; 
+    }
+</script>
+</body>
+</html>
